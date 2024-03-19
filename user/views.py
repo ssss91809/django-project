@@ -4,6 +4,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 
 
+def user_logout(request):
+    logout(request)
+    return redirect("login")
+
+
+def user_profile(request):
+    print(request.user)
+    return render(request, "user/profile.html", {"user": request.user})
+
+
 # Create your views here.
 def user_login(request):
     message = ""
@@ -56,6 +66,8 @@ def user_register(request):
                         username=username, password=password1
                     ).save()
                     message = "註冊成功!"
+
+                    return redirect("profile")
 
         except Exception as e:
             print(e)
