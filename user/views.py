@@ -31,6 +31,7 @@ def user_login(request):
                 if user:
                     login(request, user)
                     message = "登入成功!"
+                    return redirect("profile")
                 else:
                     message = "帳號或密碼錯誤!"
 
@@ -66,8 +67,6 @@ def user_register(request):
                         username=username, password=password1
                     ).save()
                     message = "註冊成功!"
-
-                    return redirect("profile")
 
         except Exception as e:
             print(e)
