@@ -19,7 +19,6 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-# 分配user次要路徑
 urlpatterns = [
-    path("", views.todo, name="logout"),
+    path("", views.todo, name="todo"),
 ]

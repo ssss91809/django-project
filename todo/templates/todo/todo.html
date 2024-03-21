@@ -2,10 +2,47 @@
 {% block title %}代辦事項{% endblock %}
 {% block style %}
 
+<style>
+    .todo-list {
+        background-color: azure;
+        margin: 12px auto;
+        width: 500px;
+        height: 200px;
+    }
+
+    .date {
+        background-color: chocolate;
+        color: aliceblue;
+    }
+
+    .text {
+        background-color: burlywood;
+        height: 100px;
+        border-radius: 6px;
+        padding: 6px;
+    }
+
+    .important {
+        color: red;
+    }
+</style>
 
 {% endblock %}
 
 {% block content %}
 <h1>ToDoList</h1>
+{% for todo in todos %}
+
+<div class="todo-list">
+    <p class="date">{{todo.created}}</p>
+    <p class="title"><u>{{todo.title}}</u>
+        {% if todo.important %}
+        <span class="important">(重要)</span>
+        {% endif %}
+    </p>
+    <p class="text">{{todo.text}}</p>
+</div>
+
+{% endfor %}
 
 {% endblock %}
