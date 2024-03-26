@@ -1,5 +1,14 @@
 from django.shortcuts import render
 from .models import Todo
+from .forms import TodoForm
+
+
+def create_todo(request):
+    form = TodoForm()
+    if request.method == "POST":
+        print(request.POST)
+
+    return render(request, "todo/create-todo.html", {"form": form})
 
 
 # Create your views here.
