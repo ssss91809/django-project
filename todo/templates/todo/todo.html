@@ -20,6 +20,7 @@
         height: 100px;
         border-radius: 6px;
         padding: 6px;
+
     }
 
     .important {
@@ -30,7 +31,16 @@
 {% endblock %}
 
 {% block content %}
-<h1>ToDoList</h1>
+<h1>
+    {% if completed %}
+    completed-todo
+    {% else %}
+    ToDoList
+    {% endif %}
+
+
+
+</h1>
 {% for todo in todos %}
 
 <div class="todo-list">
@@ -42,6 +52,7 @@
         {% endif %}
     </p>
     <p class="text">{{todo.text}}</p>
+    <a href="{% url 'delete-todo' todo.id %}" onclick="return confirmDelete()">刪除</a>
 </div>
 
 {% endfor %}
