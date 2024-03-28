@@ -5,6 +5,21 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
 
+@login_required
+def completed_todo_byid(request, id):
+    try:
+        todo = Todo.objects.get(id=id)
+        todo.completed = True
+        todo.date_completed = datetime.now()
+        todo.save
+
+    except Exception as e:
+        print(e)
+
+    return redirect("todolist")
+
+
+@login_required
 def delete_todo(request, id):
     # all,get, filter
     try:
@@ -16,6 +31,7 @@ def delete_todo(request, id):
     return redirect("todolist")
 
 
+@login_required
 def completed_todo(request):
     todos = None
     completed = True
@@ -56,7 +72,9 @@ def todolist(request):
     # todos = Todo.objects.all()
     todos = None
     if request.user.is_authenticated:
-        todos = Todo.objects.filter(user=request.user).order_by("-created")
+        todos = Todo.objects.filter(user=request.user, completed=False).order_by(
+            "-created"
+        )
 
     return render(request, "todo/todo.html", {"todos": todos})
 

@@ -6,6 +6,11 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
+def completed_todo_byid(request, id):
+    pass
+
+
+@login_required
 def user_logout(request):
     logout(request)
     return redirect("login")
