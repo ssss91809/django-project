@@ -26,6 +26,10 @@
     .important {
         color: red;
     }
+
+    a {
+        margin-left: 12px;
+    }
 </style>
 
 {% endblock %}
@@ -33,7 +37,7 @@
 {% block content %}
 <h1>
     {% if completed %}
-    completed-todo
+    Completed-todo
     {% else %}
     ToDoList
     {% endif %}
@@ -54,7 +58,11 @@
 
     <p class="text">{{todo.text}}</p>
     <a href="{% url 'delete-todo' todo.id %}" onclick="return confirmDelete()">刪除</a>
+    {% if completed %}
+    <a href="{% url 'uncompleted-todo' todo.id %}" onclick="return confirUnCompleted()">恢復</a>
+    {% else %}
     <a href="{% url 'completed-todo' todo.id %}" onclick="return confirmCompleted()">完成</a>
+    {% endif %}
 </div>
 
 {% endfor %}
